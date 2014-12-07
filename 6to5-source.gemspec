@@ -3,6 +3,7 @@ require File.expand_path("../lib/6to5/source.rb", __FILE__)
 Gem::Specification.new do |s|
   s.name = '6to5-source'
   s.version = JS6to5::Source::VERSION
+  s.date = JS6to5::Source::DATE
 
   s.summary = "6to5 source"
   s.homepage = "https://github.com/6to5/ruby-6to5"

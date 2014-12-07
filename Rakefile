@@ -18,10 +18,12 @@ task :source_gem, [:ref] do |t, args|
     end
   end
 
+  date = nil
   cd "tmp/6to5" do
     sh "git checkout #{args.ref}"
     sh "npm install"
     sh "make build"
+    date = `git show --format=%at | head -n1`.chomp
   end
 
   cp "tmp/6to5/dist/6to5.js", "lib/6to5.js"
