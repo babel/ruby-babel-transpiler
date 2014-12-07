@@ -10,7 +10,7 @@ class Test6to5 < MiniTest::Test
     assert File.file?("#{ES6to5::Source.root}/6to5/runtime.js")
   end
 
-  def test_polyfill_path_readable
+  def test_path_readable
     path = ES6to5::Source.path
     assert File.exist?(path)
     assert File.read(path)
