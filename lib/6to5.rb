@@ -24,14 +24,7 @@ module ES6to5
     end
 
     def self.context
-      @context ||= ExecJS.compile(<<-JS)
-        #{File.read(path)}
-
-        to5._transform = function() {
-          var result = to5.transform.apply(this, arguments);
-          return { code: result.code, map: result.map };
-        }
-      JS
+      @context ||= ExecJS.compile(File.read(path))
     end
   end
 
@@ -41,7 +34,8 @@ module ES6to5
     end
 
     def transform(code, options = {})
-      Source.context.call('to5._transform', code, options)
+      options['ast'] = false
+      Source.context.call('to5.transform', code, options)
     end
   end
 end
