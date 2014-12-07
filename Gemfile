@@ -1,2 +1,2 @@
 source 'https://rubygems.org'
-gemspec
+gemspec name: '6to5'
