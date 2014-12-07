@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
 
   s.files = [
     'lib/6to5.rb',
+    'lib/6to5/version.rb',
     'LICENSE'
   ]
 
