@@ -15,6 +15,8 @@ task :unpublished => "tmp/6to5" do
   cd "tmp/6to5" do
     sh "git fetch origin"
     tags = `git tag`.strip.split("\n").map { |t| t.sub("v", "") }
+    ignore = %w(1.7 1.8 1.9 1.10 1.11 1.12)
+    tags.reject! { |v| ignore.include?(v.split(".")[0, 2].join(".")) }
   end
 
   url = "https://rubygems.org/api/v1/versions/6to5-source.json"
@@ -23,13 +25,17 @@ task :unpublished => "tmp/6to5" do
 end
 
 
-task :source_gem, [:ref] => "tmp/6to5" do |t, args|
+task :source_gem, [:version] => "tmp/6to5" do |t, args|
+  unless args.version
+    abort "usage: rake source_gem[1.0.0]"
+  end
+
   sh "git clean -fdx"
 
   date = nil
   cd "tmp/6to5" do
     sh "git fetch origin"
-    sh "git checkout #{args.ref}"
+    sh "git checkout v#{args.version}"
     sh "npm install"
     sh "make build"
     date = `git show --format=%at | head -n1`.chomp
@@ -47,6 +53,9 @@ task :source_gem, [:ref] => "tmp/6to5" do |t, args|
   File.open("lib/6to5/source.rb", 'w') { |f| f.write(result) }
 
   sh "gem build 6to5-source.gemspec"
+
+  sh "gem push *.gem"
+  rm Dir["*.gem"]
 end
 
 directory "tmp"
