@@ -4,3 +4,8 @@ rvm:
   - 2.0.0
   - 2.1
   - 2.2
+
+gemfile:
+  - test/gemfiles/1.12
+  - test/gemfiles/1.13
+  - test/gemfiles/1.14
