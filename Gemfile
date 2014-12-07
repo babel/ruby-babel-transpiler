@@ -1,2 +1,6 @@
 source 'https://rubygems.org'
-gemspec name: '6to5'
+
+gem '6to5-source'
+gem 'execjs'
+gem 'rake'
+gem 'minitest'
