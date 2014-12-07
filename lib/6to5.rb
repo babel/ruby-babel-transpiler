@@ -12,15 +12,15 @@ module JS6to5
     end
 
     def self.path
-      PATH
+      File.join(root, "6to5.js")
     end
 
     def self.polyfill_path
-      POLYFILL_PATH
+      File.join(root, "6to5/polyfill.js")
     end
 
     def self.runtime_path
-      RUNTIME_PATH
+      File.join(root, "6to5/runtime.js")
     end
 
     def self.context
