@@ -1,3 +1,3 @@
-module JS6to5
+module ES6to5
   VERSION = "0.1.0"
 end

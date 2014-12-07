@@ -1,7 +1,7 @@
 require 'execjs'
 require '6to5/source'
 
-module JS6to5
+module ES6to5
   module Source
     def self.version
       VERSION

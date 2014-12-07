@@ -4,7 +4,7 @@ Ruby 6to5 is a bridge to the JS 6to5 compiler.
 
 ``` ruby
 require '6to5'
-6to5.transform File.read("foo.es6")
+ES6to5.transform File.read("foo.es6")
 ```
 
 ## Installation
