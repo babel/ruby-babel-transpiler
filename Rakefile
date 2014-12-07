@@ -11,24 +11,27 @@ end
 task :source_gem, [:ref] do |t, args|
   sh "git clean -fdx"
 
-  sh "git submodule init"
-  sh "git submodule update"
+  mkdir_p "tmp"
+  unless File.exist?("tmp/6to5")
+    cd "tmp" do
+      sh "git clone https://github.com/6to5/6to5"
+    end
+  end
 
-  cd "vendor/6to5" do
-    sh "git clean -fdx"
+  cd "tmp/6to5" do
     sh "git checkout #{args.ref}"
     sh "npm install"
     sh "make build"
   end
 
-  cp "vendor/6to5/dist/6to5.js", "lib/6to5.js"
-  cp "vendor/6to5/dist/polyfill.js", "lib/6to5/polyfill.js"
-  cp "vendor/6to5/dist/runtime.js", "lib/6to5/runtime.js"
+  cp "tmp/6to5/dist/6to5.js", "lib/6to5.js"
+  cp "tmp/6to5/dist/polyfill.js", "lib/6to5/polyfill.js"
+  cp "tmp/6to5/dist/runtime.js", "lib/6to5/runtime.js"
 
   require 'erb'
   require 'json'
   erb = ERB.new(File.read("lib/6to5/source.rb.erb"))
-  version = JSON.parse(File.read("vendor/6to5/package.json"))["version"]
+  version = JSON.parse(File.read("tmp/6to5/package.json"))["version"]
   result = erb.result(binding)
   File.open("lib/6to5/source.rb", 'w') { |f| f.write(result) }
 
