@@ -16,7 +16,7 @@ Gem::Specification.new do |s|
     'LICENSE'
   ]
 
-  # s.add_dependency '6to5-source'
+  s.add_dependency '6to5-source'
   s.add_dependency 'execjs'
   s.add_development_dependency 'rake'
 
