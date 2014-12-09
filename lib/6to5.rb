@@ -34,8 +34,7 @@ module ES6to5
     end
 
     def transform(code, options = {})
-      options['ast'] = false
-      Source.context.call('to5.transform', code, options)
+      Source.context.call('to5.transform', code, options.merge('ast' => false))
     end
   end
 end

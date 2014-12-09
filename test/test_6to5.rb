@@ -40,4 +40,14 @@ class Test6to5 < MiniTest::Test
     code = ES6to5.transform("return (function f(x, y = 12) { return x + y; })(3)")["code"]
     assert_equal 15, ExecJS.exec(code)
   end
+
+  def test_transform_options
+    code = ES6to5.transform("ary.map(v => v + 1)", "whitelist" => ["useStrict"])["code"]
+    assert_match(/strict/, code)
+
+    code = ES6to5.transform("ary.map(v => v + 1)", "blacklist" => ["useStrict"])["code"]
+    refute_match(/strict/, code)
+
+    assert ES6to5.transform("ary.map(v => v + 1)", {}.freeze)["code"]
+  end
 end
