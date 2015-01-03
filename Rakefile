@@ -26,16 +26,17 @@ end
 
 
 task :source_gem, [:version] => "tmp/6to5" do |t, args|
-  unless args.version
+  unless tag = args.version
     abort "usage: rake source_gem[1.0.0]"
   end
+  tag = "v#{tag}" unless tag.start_with?("v")
 
   sh "git clean -fdx"
 
   date = nil
   cd "tmp/6to5" do
     sh "git fetch origin"
-    sh "git checkout v#{args.version}"
+    sh "git checkout #{tag}"
     sh "npm install"
     sh "make build"
     date = `git show --format=%at | head -n1`.chomp
