@@ -7,24 +7,6 @@ Rake::TestTask.new do |t|
   t.warning = true
 end
 
-task :unpublished => "tmp/6to5" do
-  require 'json'
-  require 'open-uri'
-
-  tags = nil
-  cd "tmp/6to5" do
-    sh "git fetch origin"
-    tags = `git tag`.strip.split("\n").map { |t| t.sub("v", "") }
-    ignore = %w(1.7 1.8 1.9 1.10 1.11 1.12)
-    tags.reject! { |v| ignore.include?(v.split(".")[0, 2].join(".")) }
-  end
-
-  url = "https://rubygems.org/api/v1/versions/6to5-source.json"
-  versions = JSON.parse(open(url).read).map { |v| v["number"] }
-  puts tags - versions
-end
-
-
 task :source_gem, [:version] => "tmp/6to5" do |t, args|
   unless tag = args.version
     abort "usage: rake source_gem[1.0.0]"
