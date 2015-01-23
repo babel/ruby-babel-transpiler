@@ -7,38 +7,53 @@ Rake::TestTask.new do |t|
   t.warning = true
 end
 
-task :source_gem, [:version] => "tmp/6to5" do |t, args|
-  unless tag = args.version
-    abort "usage: rake source_gem[1.0.0]"
-  end
-  tag = "v#{tag}" unless tag.start_with?("v")
+rule /tmp\/6to5-source-/ do |task|
+  mkdir_p dir = task.name
 
-  sh "git clean -fdx"
+  require 'json'
 
-  date = nil
+  version = date = nil
   cd "tmp/6to5" do
     sh "git fetch origin"
-    sh "git checkout #{tag}"
+    sh "git checkout v#{dir.sub("tmp/6to5-source-", "")}"
     sh "npm install"
     sh "make build"
     date = `git show --format=%at | head -n1`.chomp
+    version = JSON.parse(File.read("package.json"))["version"]
   end
 
-  cp "tmp/6to5/dist/6to5.js", "lib/6to5.js"
-  cp "tmp/6to5/dist/polyfill.js", "lib/6to5/polyfill.js"
-  cp "tmp/6to5/dist/runtime.js", "lib/6to5/runtime.js"
+  mkdir_p dir
+  cp "6to5-source.gemspec", "#{dir}/6to5-source.gemspec"
+
+  mkdir_p "#{dir}/lib/6to5"
+  cp "tmp/6to5/dist/6to5.js", "#{dir}/lib/6to5.js"
+  cp "tmp/6to5/dist/polyfill.js", "#{dir}/lib/6to5/polyfill.js"
+  cp "tmp/6to5/dist/runtime.js", "#{dir}/lib/6to5/runtime.js"
 
   require 'erb'
-  require 'json'
   erb = ERB.new(File.read("lib/6to5/source.rb.erb"))
-  version = JSON.parse(File.read("tmp/6to5/package.json"))["version"]
   result = erb.result(binding)
-  File.open("lib/6to5/source.rb", 'w') { |f| f.write(result) }
+  File.open("#{dir}/lib/6to5/source.rb", 'w') { |f| f.write(result) }
+end
 
-  sh "gem build 6to5-source.gemspec"
+task :source_gem, [:version] => "tmp/6to5" do |t, args|
+  unless version = args.version
+    abort "usage: rake source_gem[1.0.0]"
+  end
+  version.gsub!("v", "")
 
-  sh "gem push *.gem"
-  rm Dir["*.gem"]
+  Rake::Task["tmp/6to5-source-#{version}"].invoke
+
+  cd "tmp/6to5-source-#{version}" do
+    sh "gem build 6to5-source.gemspec"
+    sh "gem install 6to5-source-#{version}.gem"
+  end
+
+  ENV["SOURCE_VERSION"] = version
+  sh "bundle install"
+  sh "bundle exec rake test"
+
+  sh "gem push tmp/6to5-source-#{version}/6to5-source-#{version}.gem"
 end
 
 directory "tmp"
