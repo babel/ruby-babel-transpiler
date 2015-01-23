@@ -2,6 +2,12 @@ require 'minitest/autorun'
 require '6to5'
 
 class Test6to5 < MiniTest::Test
+  def test_source_constants
+    assert ES6to5::Source::VERSION
+    assert ES6to5::Source::DATE
+    assert ES6to5::Source::ROOT
+  end
+
   def test_source_path_directory
     assert File.directory?("#{ES6to5::Source.root}")
     assert File.directory?("#{ES6to5::Source.root}/6to5")
