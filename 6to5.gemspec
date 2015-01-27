@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     'LICENSE'
   ]
 
-  s.add_dependency '6to5-source', '~> 1.14'
+  s.add_dependency '6to5-source', '>= 1.14', '< 3'
   s.add_dependency 'execjs', '~> 2.0'
 
   s.authors = ['Joshua Peek']
