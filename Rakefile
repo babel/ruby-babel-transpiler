@@ -22,15 +22,17 @@ rule /tmp\/6to5-source-/ do |task|
     version = JSON.parse(File.read("package.json"))["version"]
   end
 
-  mkdir_p dir
-  cp "6to5-source.gemspec", "#{dir}/6to5-source.gemspec"
-
   mkdir_p "#{dir}/lib/6to5"
   cp "tmp/6to5/dist/6to5.js", "#{dir}/lib/6to5.js"
   cp "tmp/6to5/dist/polyfill.js", "#{dir}/lib/6to5/polyfill.js"
   cp "tmp/6to5/dist/runtime.js", "#{dir}/lib/6to5/runtime.js"
 
   require 'erb'
+  mkdir_p dir
+  erb = ERB.new(File.read("6to5-source.gemspec.erb"))
+  result = erb.result(binding)
+  File.open("#{dir}/6to5-source.gemspec", 'w') { |f| f.write(result) }
+
   erb = ERB.new(File.read("lib/6to5/source.rb.erb"))
   result = erb.result(binding)
   File.open("#{dir}/lib/6to5/source.rb", 'w') { |f| f.write(result) }
