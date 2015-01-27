@@ -7,3 +7,4 @@ rvm:
 
 gemfile:
   - test/gemfiles/1.14
+  - test/gemfiles/2.13
