@@ -1,6 +1,0 @@
-source 'https://rubygems.org'
-
-gem '6to5-source', '~> 1.14.0'
-gem 'execjs'
-gem 'rake'
-gem 'minitest'
