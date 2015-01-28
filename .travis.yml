@@ -25,3 +25,4 @@ env:
   - SOURCE_VERSION="~>2.11.0"
   - SOURCE_VERSION="~>2.12.0"
   - SOURCE_VERSION="~>2.13.0"
+  - SOURCE_VERSION="~>3.0.0"
