@@ -17,7 +17,7 @@ Gem::Specification.new do |s|
     'LICENSE'
   ]
 
-  s.add_dependency '6to5-source', '>= 1.14', '< 3'
+  s.add_dependency '6to5-source', '>= 1.14', '< 4'
   s.add_dependency 'execjs', '~> 2.0'
   s.add_development_dependency 'rake', '~> 10.4'
   s.add_development_dependency 'minitest', '~> 5.5'

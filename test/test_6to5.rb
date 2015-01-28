@@ -13,7 +13,10 @@ class Test6to5 < MiniTest::Test
     assert File.directory?("#{ES6to5::Source.root}/6to5")
     assert File.file?("#{ES6to5::Source.root}/6to5.js")
     assert File.file?("#{ES6to5::Source.root}/6to5/polyfill.js")
-    assert File.file?("#{ES6to5::Source.root}/6to5/runtime.js")
+
+    if ES6to5.version < "3"
+      assert File.file?("#{ES6to5::Source.root}/6to5/runtime.js")
+    end
   end
 
   def test_path_readable
@@ -22,16 +25,20 @@ class Test6to5 < MiniTest::Test
     assert File.read(path)
   end
 
-  def test_polyfill_path_readable
-    path = ES6to5::Source.polyfill_path
-    assert File.exist?(path)
-    assert File.read(path)
+  if ES6to5.version < "3"
+    def test_polyfill_path_readable
+      path = ES6to5::Source.polyfill_path
+      assert File.exist?(path)
+      assert File.read(path)
+    end
   end
 
-  def test_runtime_path_readable
-    path = ES6to5::Source.runtime_path
-    assert File.exist?(path)
-    assert File.read(path)
+  if ES6to5::Source.respond_to?(:runtime_path)
+    def test_runtime_path_readable
+      path = ES6to5::Source.runtime_path
+      assert File.exist?(path)
+      assert File.read(path)
+    end
   end
 
   def test_version
