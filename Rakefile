@@ -51,6 +51,7 @@ task :source_gem, [:version] => "tmp/6to5" do |t, args|
   end
 
   ENV["SOURCE_VERSION"] = version
+  rm_f "Gemfile.lock"
   sh "bundle install"
   sh "bundle exec rake test"
 
