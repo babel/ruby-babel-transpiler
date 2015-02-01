@@ -9,7 +9,7 @@ class TestTravis < MiniTest::Test
       .map { |v| v.sub(/^(\d+)\.(\d+)\.(\d+)$/, '~>\1.\2.0') }
       .uniq
 
-    actual = config["env"].map { |s| s[/^SOURCE_VERSION="(.+)"$/, 1] }
+    actual = config["env"].map { |s| s[/^SOURCE_VERSION="(.+)"$/, 1] }.compact
 
     assert_empty expected - actual
   end
