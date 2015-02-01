@@ -19,10 +19,8 @@ module ES6to5
       File.join(root, "6to5/polyfill.js")
     end
 
-    if File.exist?(File.join(root, "6to5/runtime.js"))
-      def self.runtime_path
-        File.join(root, "6to5/runtime.js")
-      end
+    def self.runtime_path
+      File.join(root, "6to5/runtime.js")
     end
 
     def self.context

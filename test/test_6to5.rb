@@ -2,6 +2,8 @@ require 'minitest/autorun'
 require '6to5'
 
 class Test6to5 < MiniTest::Test
+  NO_RUNTIME = %w( 3.0 3.1 3.2 ).any? { |v| ES6to5.version.start_with?(v) }
+
   def test_source_constants
     assert ES6to5::Source::VERSION
     assert ES6to5::Source::DATE
@@ -14,9 +16,8 @@ class Test6to5 < MiniTest::Test
     assert File.file?("#{ES6to5::Source.root}/6to5.js")
     assert File.file?("#{ES6to5::Source.root}/6to5/polyfill.js")
 
-    if ES6to5.version < "3"
-      assert File.file?("#{ES6to5::Source.root}/6to5/runtime.js")
-    end
+    skip "no runtime.js" if NO_RUNTIME
+    assert File.file?("#{ES6to5::Source.root}/6to5/runtime.js")
   end
 
   def test_path_readable
@@ -25,20 +26,18 @@ class Test6to5 < MiniTest::Test
     assert File.read(path)
   end
 
-  if ES6to5.version < "3"
-    def test_polyfill_path_readable
-      path = ES6to5::Source.polyfill_path
-      assert File.exist?(path)
-      assert File.read(path)
-    end
+  def test_polyfill_path_readable
+    path = ES6to5::Source.polyfill_path
+    assert File.exist?(path)
+    assert File.read(path)
   end
 
-  if ES6to5::Source.respond_to?(:runtime_path)
-    def test_runtime_path_readable
-      path = ES6to5::Source.runtime_path
-      assert File.exist?(path)
-      assert File.read(path)
-    end
+  def test_runtime_path_readable
+    skip "no runtime.js" if NO_RUNTIME
+
+    path = ES6to5::Source.runtime_path
+    assert File.exist?(path)
+    assert File.read(path)
   end
 
   def test_version
