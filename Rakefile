@@ -25,6 +25,7 @@ rule /tmp\/6to5-source-/ do |task|
   mkdir_p "#{dir}/lib/6to5"
   cp "tmp/6to5/dist/6to5.js", "#{dir}/lib/6to5.js"
   cp "tmp/6to5/dist/polyfill.js", "#{dir}/lib/6to5/polyfill.js"
+  cp "tmp/6to5/dist/runtime.js", "#{dir}/lib/6to5/runtime.js"
 
   require 'erb'
   mkdir_p dir
