@@ -36,7 +36,7 @@ file "tmp/6to5" => "tmp" do
   end
 end
 
-rule /^tmp\/6to5-source-(\d+)\.(\d+)\.(\d+)$/ do |task|
+rule /^tmp\/6to5-source-(\d+)\.(\d+)\.(\d+)$/ => "tmp/6to5" do |task|
   mkdir_p dir = task.name
 
   version = date = nil
@@ -77,7 +77,7 @@ rule /^vendor\/cache\/6to5-source-(\d+)\.(\d+)\.(\d+)\.gem$/ => "vendor/cache" d
   mv "tmp/6to5-source-#{version}/6to5-source-#{version}.gem", "vendor/cache"
 end
 
-task :publish => "tmp/6to5" do
+task :publish do
   unpublished_source_versions.each do |version|
     puts "=" * 80
     puts "Releasing 6to5-source #{version}"
