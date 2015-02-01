@@ -28,7 +28,15 @@ task "source-versions.txt" do |task|
   end
 end
 
-rule /tmp\/6to5-source-/ do |task|
+directory "tmp"
+
+file "tmp/6to5" => "tmp" do
+  cd "tmp" do
+    sh "git clone https://github.com/6to5/6to5"
+  end
+end
+
+rule /^tmp\/6to5-source-(\d+)\.(\d+)\.(\d+)$/ do |task|
   mkdir_p dir = task.name
 
   version = date = nil
@@ -56,28 +64,32 @@ rule /tmp\/6to5-source-/ do |task|
   File.open("#{dir}/lib/6to5/source.rb", 'w') { |f| f.write(result) }
 end
 
+directory "vendor/cache"
+
+rule /^vendor\/cache\/6to5-source-(\d+)\.(\d+)\.(\d+)\.gem$/ => "vendor/cache" do |task|
+  version = task.name[/(\d+)\.(\d+)\.(\d+)/, 0]
+  Rake::Task["tmp/6to5-source-#{version}"].invoke
+
+  cd "tmp/6to5-source-#{version}" do
+    sh "gem build 6to5-source.gemspec"
+  end
+
+  mv "tmp/6to5-source-#{version}/6to5-source-#{version}.gem", "vendor/cache"
+end
+
 task :publish => "tmp/6to5" do
   unpublished_source_versions.each do |version|
-    Rake::Task["tmp/6to5-source-#{version}"].invoke
+    puts "=" * 80
+    puts "Releasing 6to5-source #{version}"
+    puts "=" * 80
 
-    cd "tmp/6to5-source-#{version}" do
-      sh "gem build 6to5-source.gemspec"
-      sh "gem install 6to5-source-#{version}.gem"
-    end
+    Rake::Task["vendor/cache/6to5-source-#{version}.gem"].invoke
 
     ENV["SOURCE_VERSION"] = version
     rm_f "Gemfile.lock"
-    sh "bundle install"
+    sh "bundle install --no-prune"
     sh "bundle exec rake test"
 
     sh "gem push tmp/6to5-source-#{version}/6to5-source-#{version}.gem"
-  end
-end
-
-directory "tmp"
-
-file "tmp/6to5" => "tmp" do
-  cd "tmp" do
-    sh "git clone https://github.com/6to5/6to5"
   end
 end
