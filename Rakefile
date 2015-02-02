@@ -19,7 +19,7 @@ end
 
 def unpublished_source_versions
   versions = File.read("source-versions.txt").split("\n")
-  published_source_versions - versions
+  versions - published_source_versions
 end
 
 task "source-versions.txt" do |task|
