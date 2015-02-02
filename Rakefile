@@ -90,6 +90,6 @@ task :publish do
     sh "bundle install --no-prune"
     sh "bundle exec rake test"
 
-    sh "gem push tmp/6to5-source-#{version}/6to5-source-#{version}.gem"
+    sh "gem push vendor/cache/6to5-source-#{version}.gem"
   end
 end
