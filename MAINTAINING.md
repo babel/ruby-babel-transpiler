@@ -8,7 +8,7 @@ will require a new major release.
 ### Make a release commit
 
 To prepare the release commit, edit the
-[lib/6to5/version.rb](https://github.com/6to5/6to5-ruby/blob/master/lib/6to5/version.rb)
+[lib/6to5/version.rb](https://github.com/6to5/ruby-6to5/blob/master/lib/6to5/version.rb)
 constant. Then make a single commit with the description as
 "Ruby 6to5 1.x.x". Tag the commit with `v1.x.x`. Finally, build the gem and
 push it to RubyGems.
@@ -17,7 +17,7 @@ push it to RubyGems.
 $ git pull
 $ vim lib/6to5/version.rb
 $ git add lib/6to5/version.rb
-$ git ci -m "Ruby 6to5 1.x.x"
+$ git commit -m "Ruby 6to5 1.x.x"
 $ git tag v1.x.x
 $ git push
 $ git push --tags
