@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'execjs', '~> 2.0'
   s.add_development_dependency 'rake', '~> 10.4'
   s.add_development_dependency 'minitest', '~> 5.5'
+  s.add_development_dependency 'therubyracer', '~> 0.12'
 
   s.authors = ['Joshua Peek']
   s.email   = 'josh@joshpeek.com'

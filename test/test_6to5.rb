@@ -4,6 +4,10 @@ require '6to5'
 class Test6to5 < MiniTest::Test
   NO_RUNTIME = %w( 3.0 3.1 3.2 ).any? { |v| ES6to5.version.start_with?(v) }
 
+  def setup
+    ExecJS.runtime = ExecJS::Runtimes.autodetect
+  end
+
   def test_source_constants
     assert ES6to5::Source::VERSION
     assert ES6to5::Source::DATE
@@ -51,6 +55,14 @@ class Test6to5 < MiniTest::Test
 
     code = ES6to5.transform("return (function f(x, y = 12) { return x + y; })(3)")["code"]
     assert_equal 15, ExecJS.exec(code)
+  end
+
+  def test_every_runtime
+    ExecJS::Runtimes.runtimes.reject(&:deprecated?).find_all(&:available?).each do |runtime|
+      ExecJS.runtime = runtime
+      # just make sure it doesn't throw an error
+      ES6to5.transform("return [0, 2, 4].map(v => v + 1)")["code"]
+    end
   end
 
   def test_transform_options

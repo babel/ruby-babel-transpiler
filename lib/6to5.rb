@@ -24,7 +24,7 @@ module ES6to5
     end
 
     def self.context
-      @context ||= ExecJS.compile(File.read(path))
+      @context ||= ExecJS.compile('var self = this;' + File.read(path))
     end
   end
 
