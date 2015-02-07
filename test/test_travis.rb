@@ -11,6 +11,8 @@ class TestTravis < MiniTest::Test
 
     actual = config["env"].map { |s| s[/^SOURCE_VERSION="(.+)"$/, 1] }.compact
 
-    assert_empty expected - actual
+    missing = expected - actual
+    assert_empty missing, "Add the following envs to .travis.yml: \n" +
+      missing.map { |v| "- SOURCE_VERSION=\"#{v}\"" }.join("\n")
   end
 end
