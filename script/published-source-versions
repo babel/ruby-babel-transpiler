@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+require 'json'
+require 'open-uri'
+
+url = "https://rubygems.org/api/v1/versions/6to5-source.json"
+puts JSON.parse(open(url).read).map { |v| v["number"] }.reverse

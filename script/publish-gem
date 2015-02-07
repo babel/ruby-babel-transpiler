@@ -1,0 +1,14 @@
+#!/bin/bash
+
+VERSION="$1"
+
+echo "================================================================================" >&2
+echo "Releasing 6to5-source $VERSION" >&2
+echo "================================================================================" >&2
+
+set -e
+set -x
+
+./script/build-gem "$VERSION"
+./script/test-gem "$VERSION"
+gem push "tmp/vendor/cache/6to5-source-$VERSION.gem"

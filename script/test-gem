@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+set -x
+
+export SOURCE_VERSION="$1"
+
+if [ ! -f "tmp/vendor/cache/6to5-source-$SOURCE_VERSION.gem" ]; then
+  ./script/build-gem "$SOURCE_VERSION"
+fi
+
+cp Gemfile tmp/Gemfile
+rm -f tmp/Gemfile.lock
+
+export BUNDLE_GEMFILE="tmp/Gemfile"
+unset BUILD_SOURCE_GEM RUBYOPT
+
+bundle install --no-prune
+bundle exec rake test

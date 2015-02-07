@@ -27,8 +27,8 @@ $ gem push 6to5*.gem
 
 ## Releasing a new source version
 
-`6to5-source` gems are build seperately and are not checked into git.
+`6to5-source` gems are build separately and are not checked into git.
 
 ``` sh
-$ rake source_gem[1.0.0]
+$ ./script/publish-gem 1.0.0
 ```

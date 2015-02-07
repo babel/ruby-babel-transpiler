@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e
+set -x
+
+VERSION="$1"
+
+mkdir -p tmp/
+pushd tmp/
+
+if [ ! -d 6to5 ]; then
+  git clone https://github.com/6to5/6to5
+fi
+
+pushd 6to5/
+git fetch origin
+
+git checkout --quiet "v$VERSION"
+npm install
+make build
+
+DATE=$(git show --format=%at | head -n1)
+
+popd
+popd
+
+dir="tmp/6to5-source-$VERSION"
+mkdir -p "$dir/lib/6to5"
+cp "tmp/6to5/dist/6to5.js" "$dir/lib/6to5.js"
+cp "tmp/6to5/dist/polyfill.js" "$dir/lib/6to5/polyfill.js"
+cp "tmp/6to5/dist/runtime.js" "$dir/lib/6to5/runtime.js"
+
+./script/eval-erb-template "6to5-source.gemspec.erb" "$VERSION" "$DATE" > "$dir/6to5-source.gemspec"
+./script/eval-erb-template "lib/6to5/source.rb.erb" "$VERSION" "$DATE" > "$dir/lib/6to5/source.rb"
+
+pushd "$dir"
+unset RUBYOPT
+gem build 6to5-source.gemspec
+popd
+
+mkdir -p tmp/vendor/cache
+cp "$dir/6to5-source-$VERSION.gem" "tmp/vendor/cache"

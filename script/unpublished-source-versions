@@ -1,0 +1,2 @@
+#!/bin/bash
+comm -13 <(./script/published-source-versions | sort) <(cat source-versions.txt | sort)
