@@ -19,9 +19,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency '6to5-source', '>= 1.14', '< 4'
   s.add_dependency 'execjs', '~> 2.0'
-  s.add_development_dependency 'bundler', '~> 1.7'
-  s.add_development_dependency 'minitest', '~> 5.5'
   s.add_development_dependency 'rake', '~> 10.4'
+  s.add_development_dependency 'minitest', '~> 5.5'
 
   s.authors = ['Joshua Peek']
   s.email   = 'josh@joshpeek.com'
