@@ -13,7 +13,6 @@ cp Gemfile tmp/Gemfile
 rm -f tmp/Gemfile.lock
 
 export BUNDLE_GEMFILE="tmp/Gemfile"
-unset BUILD_SOURCE_GEM RUBYOPT
-
 bundle install --no-prune
+
 bundle exec rake test

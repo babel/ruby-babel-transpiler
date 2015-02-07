@@ -2,6 +2,8 @@ language: ruby
 cache: bundler
 sudo: false
 
+script: ./script/test
+
 rvm:
   - 2.0.0
   - 2.1

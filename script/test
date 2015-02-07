@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+bundle exec rake test
+
+if [ -n "$BUILD_SOURCE_GEM" ]
+then
+  for version in $(./script/unpublished-source-versions)
+  do
+    ./script/test-gem "$version"
+  done
+fi
