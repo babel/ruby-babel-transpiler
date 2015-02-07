@@ -5,6 +5,8 @@ set -x
 
 VERSION="$1"
 
+unset BUNDLE_GEMFILE BUNDLE_PATH RUBYOPT
+
 mkdir -p tmp/
 pushd tmp/
 
@@ -34,7 +36,6 @@ cp "tmp/6to5/dist/runtime.js" "$dir/lib/6to5/runtime.js"
 ./script/eval-erb-template "lib/6to5/source.rb.erb" "$VERSION" "$DATE" > "$dir/lib/6to5/source.rb"
 
 pushd "$dir"
-unset RUBYOPT
 gem build 6to5-source.gemspec
 popd
 
