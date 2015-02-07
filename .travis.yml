@@ -30,3 +30,4 @@ env:
   - SOURCE_VERSION="~>3.1.0"
   - SOURCE_VERSION="~>3.2.0"
   - SOURCE_VERSION="~>3.3.0"
+  - SOURCE_VERSION="~>3.4.0"
