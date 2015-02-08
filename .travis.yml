@@ -3,6 +3,7 @@ cache: bundler
 sudo: false
 
 script: ./script/test
+after_success: ./script/deploy
 
 rvm:
   - 2.0.0
