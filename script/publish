@@ -1,8 +1,0 @@
-#!/bin/bash
-
-set -e
-
-for version in $(./script/unpublished-source-versions)
-do
-  ./script/publish-gem "$version"
-done

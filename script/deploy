@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+if [ -n "$TRAVIS_SECURE_ENV_VARS" ]; then
+  cat << EOF > ~/.gem/credentials
+---
+:rubygems_api_key: $RUBYGEMS_API_KEY
+EOF
+  chmod 0600 ~/.gem/credentials
+fi
+
+for version in $(./script/unpublished-source-versions)
+do
+  ./script/publish-gem "$version"
+done
