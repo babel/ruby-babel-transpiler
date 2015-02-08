@@ -2,7 +2,13 @@
 
 set -e
 
-if [ -n "$TRAVIS_SECURE_ENV_VARS" ]; then
+if [ -n "$TRAVIS" ] && ([ "$TRAVIS_SECURE_ENV_VARS" != "true" ] || [ "$TRAVIS_BRANCH" != "master" ])
+then
+  echo "skipping deploy"
+  exit 0
+fi
+
+if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then
   cat << EOF > ~/.gem/credentials
 ---
 :rubygems_api_key: $RUBYGEMS_API_KEY
