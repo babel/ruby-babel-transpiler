@@ -11,6 +11,7 @@ rvm:
 
 env:
   - BUILD_SOURCE_GEM=1
+  - VALIDATE_TRAVIS=1
   - SOURCE_VERSION="~>1.14.0"
   - SOURCE_VERSION="~>1.15.0"
   - SOURCE_VERSION="~>2.0.0"
@@ -33,3 +34,7 @@ env:
   - SOURCE_VERSION="~>3.2.0"
   - SOURCE_VERSION="~>3.3.0"
   - SOURCE_VERSION="~>3.4.0"
+
+matrix:
+  allow_failures:
+    - env: VALIDATE_TRAVIS=1
