@@ -14,7 +14,7 @@ if ENV['VALIDATE_TRAVIS']
       local = version_constraints(File.read("source-versions.txt").split("\n"))
 
       config = YAML.load(File.read(".travis.yml"))
-      travis = Set.new(config["env"].map { |s| s[/^SOURCE_VERSION="(.+)"$/, 1] }.compact)
+      travis = Set.new(config["env"]["matrix"].map { |s| s[/^SOURCE_VERSION="(.+)"$/, 1] }.compact)
 
       missing = (published & local) - travis
       assert_empty missing, "Add the following envs to .travis.yml: \n" +
