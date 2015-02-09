@@ -20,5 +20,8 @@ fi
 
 for version in $(./script/unpublished-source-versions)
 do
-  ./script/publish-gem "$version"
+  if [ ! -f "tmp/vendor/cache/6to5-source-$version.gem" ]; then
+    ./script/test-gem "$version"
+  fi
+  gem push "tmp/vendor/cache/6to5-source-$version.gem"
 done
