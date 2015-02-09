@@ -4,8 +4,11 @@ set -e
 
 if [ -n "$TRAVIS" ] && ([ "$TRAVIS_SECURE_ENV_VARS" != "true" ] || [ "$TRAVIS_BRANCH" != "master" ] || [ -z "$BUILD_SOURCE_GEM" ])
 then
+  echo "skipping deploy" >&2
   exit 0
 fi
+
+echo "deploying unpublished versions" >&2
 
 if [ "$TRAVIS_SECURE_ENV_VARS" = "true" ]; then
   cat << EOF > ~/.gem/credentials
