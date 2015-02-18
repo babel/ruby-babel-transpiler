@@ -5,11 +5,6 @@ sudo: false
 script: ./script/test
 after_success: ./script/deploy
 
-rvm:
-  - 2.0.0
-  - 2.1
-  - 2.2
-
 env:
   global:
     secure: "XT/kMVPucmliC0l0Or2l3Za43l4sYt5fhX2ISkfb1OnJezIa+mgGTSPCpi1cBx+NPSCV96qyIP0Fybhb+pI/UQFhvzPTP26HfmrXN7TmQfesPgIS6wYQZc79GyNW93am5NQBqFISuriAMCgkdlmNAYcWYMGvLvKeyUDPAjgIzVM="
@@ -22,5 +17,9 @@ env:
     - SOURCE_VERSION="~>4.3.0"
 
 matrix:
+  include:
+    - rvm: 2.0.0
+    - rvm: 2.1
+    - rvm: 2.2
   allow_failures:
     - env: VALIDATE_TRAVIS=1
