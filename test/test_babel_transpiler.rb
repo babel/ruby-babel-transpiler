@@ -2,8 +2,6 @@ require 'minitest/autorun'
 require 'babel/transpiler'
 
 class TestBabelTranspiler < MiniTest::Test
-  NO_RUNTIME = %w( 3.0 3.1 3.2 ).any? { |v| Babel::Transpiler.version.start_with?(v) }
-
   def test_source_constants
     assert Babel::Source::VERSION
     assert Babel::Source::DATE
