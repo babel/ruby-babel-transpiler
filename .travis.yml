@@ -19,7 +19,10 @@ env:
 matrix:
   include:
     - rvm: 2.0.0
+      env:
     - rvm: 2.1
+      env:
     - rvm: 2.2
+      env:
   allow_failures:
     - env: VALIDATE_TRAVIS=1
