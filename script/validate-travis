@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+
+require 'set'
+require 'yaml'
+
+def version_constraints(versions)
+  Set.new(versions.compact.map { |v| v.sub(/^(\d+)\.(\d+)\.(\d+)$/, '~>\1.\2.0') })
+end
+
+published = version_constraints(`./script/published-source-versions`.split("\n"))
+local = version_constraints(`./script/local-source-versions`.split("\n"))
+
+config = YAML.load(File.read(".travis.yml"))
+travis = Set.new(config["env"]["matrix"].map { |s| s[/^SOURCE_VERSION="(.+)"$/, 1] }.compact)
+
+missing = (published & local) - travis
+
+if missing.any?
+  abort "Add the following envs to .travis.yml: \n" +
+    missing.map { |v| "- SOURCE_VERSION=\"#{v}\"" }.join("\n")
+end

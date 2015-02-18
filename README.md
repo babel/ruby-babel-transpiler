@@ -1,21 +1,21 @@
-# Ruby 6to5 Compiler
+# Ruby Babel Transpiler
 
-Ruby 6to5 is a bridge to the JS 6to5 compiler.
+Ruby Babel is a bridge to the [JS Babel transpiler](https://babeljs.io).
 
 ``` ruby
-require '6to5'
-ES6to5.transform File.read("foo.es6")
+require 'babel/transpiler'
+Babel::Transpiler.transform File.read("foo.es6")
 ```
 
 ## Installation
 
 ``` sh
-$ gem install 6to5
+$ gem install babel-transpiler
 ```
 
 ## Dependencies
 
-This library depends on the `6to5-source` gem which is updated any time a new version of 6to5 is released.
+This library depends on the `babel-source` gem which is updated any time a new version of [Babel](https://babeljs.io) is released.
 
 ### ExecJS
 

@@ -16,30 +16,10 @@ env:
   matrix:
     - BUILD_SOURCE_GEM=1
     - VALIDATE_TRAVIS=1
-    - SOURCE_VERSION="~>1.14.0"
-    - SOURCE_VERSION="~>1.15.0"
-    - SOURCE_VERSION="~>2.0.0"
-    - SOURCE_VERSION="~>2.1.0"
-    - SOURCE_VERSION="~>2.1.0"
-    - SOURCE_VERSION="~>2.2.0"
-    - SOURCE_VERSION="~>2.3.0"
-    - SOURCE_VERSION="~>2.4.0"
-    - SOURCE_VERSION="~>2.5.0"
-    - SOURCE_VERSION="~>2.6.0"
-    - SOURCE_VERSION="~>2.7.0"
-    - SOURCE_VERSION="~>2.8.0"
-    - SOURCE_VERSION="~>2.9.0"
-    - SOURCE_VERSION="~>2.10.0"
-    - SOURCE_VERSION="~>2.11.0"
-    - SOURCE_VERSION="~>2.12.0"
-    - SOURCE_VERSION="~>2.13.0"
-    - SOURCE_VERSION="~>3.0.0"
-    - SOURCE_VERSION="~>3.1.0"
-    - SOURCE_VERSION="~>3.2.0"
-    - SOURCE_VERSION="~>3.3.0"
-    - SOURCE_VERSION="~>3.4.0"
-    - SOURCE_VERSION="~>3.5.0"
-    - SOURCE_VERSION="~>3.6.0"
+    - SOURCE_VERSION="~>4.0.0"
+    - SOURCE_VERSION="~>4.1.0"
+    - SOURCE_VERSION="~>4.2.0"
+    - SOURCE_VERSION="~>4.3.0"
 
 matrix:
   allow_failures:

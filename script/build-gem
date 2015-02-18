@@ -8,11 +8,11 @@ VERSION="$1"
 mkdir -p tmp/
 pushd tmp/
 
-if [ ! -d 6to5 ]; then
-  git clone https://github.com/6to5/6to5
+if [ ! -d babel ]; then
+  git clone https://github.com/babel/babel
 fi
 
-pushd 6to5/
+pushd babel/
 git fetch origin
 
 git checkout --quiet "v$VERSION"
@@ -24,18 +24,19 @@ DATE=$(git show --format=%at | head -n1)
 popd
 popd
 
-dir="tmp/6to5-source-$VERSION"
-mkdir -p "$dir/lib/6to5"
-cp "tmp/6to5/dist/6to5.js" "$dir/lib/6to5.js"
-cp "tmp/6to5/dist/polyfill.js" "$dir/lib/6to5/polyfill.js"
-cp "tmp/6to5/dist/runtime.js" "$dir/lib/6to5/runtime.js"
+dir="tmp/babel-source-$VERSION"
+mkdir -p "$dir/lib/babel"
+cp "tmp/babel/dist/babel.js" "$dir/lib/babel.js"
+cp "tmp/babel/dist/external-helpers.js" "$dir/lib/babel/external-helpers.js"
+cp "tmp/babel/dist/polyfill.js" "$dir/lib/babel/polyfill.js"
 
-./script/eval-erb-template "6to5-source.gemspec.erb" "$VERSION" "$DATE" > "$dir/6to5-source.gemspec"
-./script/eval-erb-template "lib/6to5/source.rb.erb" "$VERSION" "$DATE" > "$dir/lib/6to5/source.rb"
+cp "tmp/babel/LICENSE" "$dir/LICENSE"
+./script/eval-erb-template "babel-source.gemspec.erb" "$VERSION" "$DATE" > "$dir/babel-source.gemspec"
+./script/eval-erb-template "lib/babel/source.rb.erb" "$VERSION" "$DATE" > "$dir/lib/babel/source.rb"
 
 pushd "$dir"
-gem build 6to5-source.gemspec
+gem build babel-source.gemspec
 popd
 
 mkdir -p tmp/vendor/cache
-cp "$dir/6to5-source-$VERSION.gem" "tmp/vendor/cache"
+cp "$dir/babel-source-$VERSION.gem" "tmp/vendor/cache"

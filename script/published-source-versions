@@ -3,5 +3,5 @@
 require 'json'
 require 'open-uri'
 
-url = "https://rubygems.org/api/v1/versions/6to5-source.json"
+url = "https://rubygems.org/api/v1/versions/babel-source.json"
 puts JSON.parse(open(url).read).map { |v| v["number"] }.reverse
