@@ -15,4 +15,4 @@ rm -f tmp/Gemfile.lock
 export BUNDLE_GEMFILE="tmp/Gemfile"
 bundle install --no-prune
 
-bundle exec rake test
+bundle exec ruby test/test_babel_transpiler.rb
