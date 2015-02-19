@@ -8,15 +8,15 @@ will require a new major release.
 ### Make a release commit
 
 To prepare the release commit, edit the
-[lib/babel_transpiler/version.rb](https://github.com/babel/ruby-babel-transpiler/blob/master/lib/babel_transpiler/version.rb)
+[lib/babel/transpiler/version.rb](https://github.com/babel/ruby-babel-transpiler/blob/master/lib/babel/transpiler/version.rb)
 constant. Then make a single commit with the description as
 "Ruby Babel Transpiler 1.x.x". Tag the commit with `v1.x.x`. Finally, build the gem and
 push it to RubyGems.
 
 ``` sh
 $ git pull
-$ vim lib/babel_transpiler/version.rb
-$ git add lib/babel_transpiler/version.rb
+$ vim lib/babel/transpiler/version.rb
+$ git add lib/babel/transpiler/version.rb
 $ git commit -m "Ruby Babel Transpiler 1.x.x"
 $ git tag v1.x.x
 $ git push
