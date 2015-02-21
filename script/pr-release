@@ -1,0 +1,22 @@
+#!/bin/bash
+
+set -e
+
+version="$1"
+null_blob="e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+
+parent=$(git rev-parse HEAD)
+subdir="source-versions"
+old_source=$(git ls-tree -l "$parent" "$subdir" | cut -d' ' -f3)
+
+entry="100644 blob $null_blob	$version"
+new_source=$((git ls-tree "$old_source"; echo "$entry") | git mktree)
+tree=$(git ls-tree "$parent" | sed "s/$old_source/$new_source/g" | git mktree)
+
+message="Release $version"
+commit=$(echo "$message" | git commit-tree "$tree" -p "$parent")
+
+ref="refs/heads/release-$version"
+git update-ref "$ref" "$commit"
+git push origin "$ref"
+git update-ref -d "$ref"
