@@ -2,7 +2,10 @@
 
 set -e
 
-version="$1"
+user="$1"
+token="$2"
+version="$3"
+
 null_blob="e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
 
 parent=$(git rev-parse HEAD)
@@ -18,5 +21,10 @@ commit=$(echo "$message" | git commit-tree "$tree" -p "$parent")
 
 ref="refs/heads/release-$version"
 git update-ref "$ref" "$commit"
-git push origin "$ref"
+git push "https://$token@github.com/$user/ruby-babel-transpiler.git" "$ref"
 git update-ref -d "$ref"
+
+url="https://api.github.com/repos/babel/ruby-babel-transpiler/pulls"
+body="{\"title\": \"Release $version\", \"base\": \"master\", \"head\": \"$user:release-$version\"}"
+header="Authorization: token $token"
+echo "$body" | curl -H "$header" -X POST -d @- "$url"
