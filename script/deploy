@@ -2,7 +2,7 @@
 
 set -e
 
-if [ -n "$TRAVIS" ] && ([ "$TRAVIS_SECURE_ENV_VARS" != "true" ] || [ "$TRAVIS_BRANCH" != "master" ] || [ -n "$TRAVIS_PULL_REQUEST" ] || [ -z "$BUILD_SOURCE_GEM" ])
+if [ -n "$TRAVIS" ] && ([ "$TRAVIS_SECURE_ENV_VARS" != "true" ] || [ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ] || [ -z "$BUILD_SOURCE_GEM" ])
 then
   echo "skipping deploy" >&2
   exit 0
