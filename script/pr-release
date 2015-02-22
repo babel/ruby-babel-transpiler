@@ -6,9 +6,12 @@ user="$1"
 token="$2"
 version="$3"
 
+git init
+git fetch https://github.com/babel/ruby-babel-transpiler
+
 null_blob="e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
 
-parent=$(git rev-parse HEAD)
+parent=$(git rev-parse FETCH_HEAD)
 subdir="source-versions"
 old_source=$(git ls-tree -l "$parent" "$subdir" | cut -d' ' -f3)
 
