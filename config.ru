@@ -1,5 +1,6 @@
 require 'json'
 require 'rack/request'
+require 'shellwords'
 
 module App
   USER = ENV['USER'] || fail("USER not set")
@@ -10,8 +11,8 @@ module App
     payload = JSON.parse(request.body.read)
 
     if payload["ref"] && (version = payload["ref"][/(\d+\.\d+\.\d+)/, 1])
-      system "pr-release", USER, TOKEN, version
-      fail "pr-release failed" unless $?.success?
+      output = `pr-release #{Shellwords.join([USER, TOKEN, version])} 2>&1`
+      fail "pr-release failed:\n#{output}" unless $?.success?
     end
 
     [200, {'Content-Type' => 'text/plain'}, []]
