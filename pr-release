@@ -6,6 +6,9 @@ user="$1"
 token="$2"
 version="$3"
 
+export GIT_AUTHOR_NAME="BabelBot"
+export GIT_AUTHOR_EMAIL="bot@babeljs.io"
+
 git init
 git fetch https://github.com/babel/ruby-babel-transpiler
 
