@@ -36,6 +36,6 @@ To complete the automation workflow, "release requests" are automatically publis
 
 [![](https://cloud.githubusercontent.com/assets/137/6420592/0827ad96-be8d-11e4-8345-de7c8bc05621.png)](https://github.com/babel/ruby-babel-transpiler/pull/111/files)
 
-A [babel/babel](https://github.com/babel/babel/releases) Webhook is setup to POST to a Heroku instance running the [pr-release](https://github.com/babel/ruby-babel-transpiler/blob/heroku/pr-release) script. Its only responsible for opening a PR with a new `source-versions/1.x.x` file.
+A [babel/babel](https://github.com/babel/babel/releases) Webhook is setup to POST to a Heroku instance running the [pr-release](https://github.com/babel/ruby-babel-transpiler/blob/heroku/pr-release) script. Its only responsible for opening a PR with a new `source-versions/1.x.x` file. To avoid merge conflicts, the local versions are tracked as individual files rather than a single file with a list of versions.
 
 Should the Webhook fail or a PR need to be reopened for an older version, this can all be done manually with any GitHub user or fork. Theres nothing special about the bot account or its permissions.
