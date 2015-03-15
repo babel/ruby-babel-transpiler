@@ -7,7 +7,7 @@ after_success: ./script/deploy
 
 env:
   global:
-    secure: "XT/kMVPucmliC0l0Or2l3Za43l4sYt5fhX2ISkfb1OnJezIa+mgGTSPCpi1cBx+NPSCV96qyIP0Fybhb+pI/UQFhvzPTP26HfmrXN7TmQfesPgIS6wYQZc79GyNW93am5NQBqFISuriAMCgkdlmNAYcWYMGvLvKeyUDPAjgIzVM="
+    secure: "QQRK8r/bp7FY8gDAPKywoiUkUSmW5gjrV4d1CM8IguncenjAy0HKGrOy0bWMLj0iz211AuxVvofk6c7B3410ILIjbGgMlPNFe8AGlZhL5lTIIc3D4SxEJ5t/cGQ/BCOyN+IG5qvgYBjwcRQm56NNOhwIHWYS6noAQOWfjafxL3I="
   matrix:
     - BUILD_SOURCE_GEM=1
     - VALIDATE_TRAVIS=1
