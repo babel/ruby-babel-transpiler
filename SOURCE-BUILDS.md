@@ -1,6 +1,6 @@
 # Babel Source Builds
 
-The Ruby transpiler bridge is just a thin [ExecJS](https://github.com/sstephenson/execjs) wrapper around the [Babel](https://babeljs.io) JS source. The source itself is redistributed as a  [babel-source](https://rubygems.org/gems/babel-source) RubyGem with the corresponding version. This means users can easily upgrade to the latest Babel anytime its released while maintaining Ruby API compatibility.
+The Ruby transpiler bridge is just a thin [ExecJS](https://github.com/rails/execjs) wrapper around the [Babel](https://babeljs.io) JS source. The source itself is redistributed as a  [babel-source](https://rubygems.org/gems/babel-source) RubyGem with the corresponding version. This means users can easily upgrade to the latest Babel anytime its released while maintaining Ruby API compatibility.
 
 Babel JS releases tend be released more frequently than changes to the Ruby bridge itself. So theres some automation behind releasing the source gems.
 
