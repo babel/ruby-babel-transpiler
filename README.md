@@ -19,4 +19,4 @@ This library depends on the `babel-source` gem which is updated any time a new v
 
 ### ExecJS
 
-The [ExecJS](https://github.com/sstephenson/execjs) library is used to automatically choose the best JavaScript engine for your platform. Check out its [README](https://github.com/sstephenson/execjs/blob/master/README.md) for a complete list of supported engines.
+The [ExecJS](https://github.com/rails/execjs) library is used to automatically choose the best JavaScript engine for your platform. Check out its [README](https://github.com/rails/execjs/blob/master/README.md) for a complete list of supported engines.
