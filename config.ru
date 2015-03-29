@@ -12,7 +12,7 @@ module App
     request = Rack::Request.new(env)
     payload = JSON.parse(request.body.read)
 
-    if payload["ref"] && (version = payload["ref"][/(\d+\.\d+\.\d+)/, 1])
+    if payload["ref"] && (version = payload["ref"][/\Av(\d+\.\d+\.\d+.*)\z/, 1])
       output = `#{__dir__}/pr-release #{Shellwords.join([USER, TOKEN, version])} 2>&1`
       fail "pr-release failed:\n#{output}" unless $?.success?
     end
