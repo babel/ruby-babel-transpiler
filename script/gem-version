@@ -1,2 +1,6 @@
 #!/bin/bash
-echo $1 | sed s/-/./g
+if [ -n "$1" ]; then
+  echo $1 | sed s/-/./g
+else
+  sed s/-/./g
+fi
