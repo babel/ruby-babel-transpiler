@@ -20,8 +20,10 @@ fi
 
 for version in $(./script/unpublished-source-versions)
 do
-  if [ ! -f "tmp/vendor/cache/babel-source-$version.gem" ]; then
+  gem_version="$(./script/gem-version $version)"
+
+  if [ ! -f "tmp/vendor/cache/babel-source-$gem_version.gem" ]; then
     ./script/test-gem "$version"
   fi
-  gem push "tmp/vendor/cache/babel-source-$version.gem"
+  gem push "tmp/vendor/cache/babel-source-$gem_version.gem"
 done
