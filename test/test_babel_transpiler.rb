@@ -28,11 +28,11 @@ class TestBabelTranspiler < MiniTest::Test
   end
 
   def test_transform
-    code = Babel::Transpiler.transform("return [0, 2, 4].map(v => v + 1)")["code"]
-    assert_equal [1, 3, 5], ExecJS.exec(code)
+    code = Babel::Transpiler.transform("[0, 2, 4].map(v => v + 1)", "blacklist" => ["useStrict"])["code"]
+    assert_equal [1, 3, 5], ExecJS.exec("return #{code}")
 
-    code = Babel::Transpiler.transform("return (function f(x, y = 12) { return x + y; })(3)")["code"]
-    assert_equal 15, ExecJS.exec(code)
+    code = Babel::Transpiler.transform("(function f(x, y = 12) { return x + y; })(3)", "blacklist" => ["useStrict"])["code"]
+    assert_equal 15, ExecJS.exec("return #{code}")
   end
 
   def test_transform_options
