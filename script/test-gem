@@ -3,10 +3,11 @@
 set -e
 set -x
 
-export SOURCE_VERSION="$1"
+export VERSION="$1"
+export SOURCE_VERSION=$(./script/gem-version $VERSION)
 
 if [ ! -f "tmp/vendor/cache/babel-source-$SOURCE_VERSION.gem" ]; then
-  ./script/build-gem "$SOURCE_VERSION"
+  ./script/build-gem "$VERSION"
 fi
 
 cp Gemfile tmp/Gemfile
