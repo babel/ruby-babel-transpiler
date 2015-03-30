@@ -4,6 +4,7 @@ set -e
 set -x
 
 VERSION="$1"
+GEM_VERSION=$(./script/gem-version $VERSION)
 
 mkdir -p tmp/
 pushd tmp/
@@ -31,12 +32,12 @@ cp "tmp/babel/dist/external-helpers.js" "$dir/lib/babel/external-helpers.js"
 cp "tmp/babel/dist/polyfill.js" "$dir/lib/babel/polyfill.js"
 
 cp "tmp/babel/LICENSE" "$dir/LICENSE"
-./script/eval-erb-template "babel-source.gemspec.erb" "$VERSION" "$DATE" > "$dir/babel-source.gemspec"
-./script/eval-erb-template "lib/babel/source.rb.erb" "$VERSION" "$DATE" > "$dir/lib/babel/source.rb"
+./script/eval-erb-template "babel-source.gemspec.erb" "$GEM_VERSION" "$DATE" > "$dir/babel-source.gemspec"
+./script/eval-erb-template "lib/babel/source.rb.erb" "$GEM_VERSION" "$DATE" > "$dir/lib/babel/source.rb"
 
 pushd "$dir"
 gem build babel-source.gemspec
 popd
 
 mkdir -p tmp/vendor/cache
-cp "$dir/babel-source-$VERSION.gem" "tmp/vendor/cache"
+cp "$dir/babel-source-$GEM_VERSION.gem" "tmp/vendor/cache"
