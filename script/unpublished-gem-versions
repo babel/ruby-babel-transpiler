@@ -1,0 +1,2 @@
+#!/bin/bash
+comm -13 <(./script/published-source-versions | sort) <(./script/local-source-versions | ./script/gem-version | sort)
