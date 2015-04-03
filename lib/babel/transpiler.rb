@@ -21,11 +21,26 @@ module Babel
     end
 
     def self.context
-      @context ||= ExecJS.compile("var self = this; " + File.read(script_path))
+      @context ||= ExecJS.compile(POLYFILL + File.read(script_path))
     end
 
     def self.transform(code, options = {})
       context.call('babel.transform', code, options.merge('ast' => false))
     end
+
+    POLYFILL = <<-JS.freeze
+var self = this;
+
+if (typeof setTimeout == 'undefined') {
+  setTimeout = function(callback) {
+    callback();
+  };
+}
+if (typeof setInterval == 'undefined') {
+  setInterval = function(callback) {
+    callback();
+  };
+}
+    JS
   end
 end
