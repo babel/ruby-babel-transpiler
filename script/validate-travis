@@ -4,7 +4,9 @@ require 'set'
 require 'yaml'
 
 def version_constraints(versions)
-  Set.new(versions.compact.map { |v| v.sub(/^(\d+)\.(\d+)\.(\d+)$/, '~>\1.\2.0') })
+  Set.new(versions.compact.map { |v|
+    v =~ /^(\d+)\.(\d+)\.(\d+)$/ && v.sub(/^(\d+)\.(\d+)\.(\d+)$/, '~>\1.\2.0')
+  }.compact)
 end
 
 published = version_constraints(`./script/published-source-versions`.split("\n"))
