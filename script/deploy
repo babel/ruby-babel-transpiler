@@ -18,7 +18,7 @@ EOF
   chmod 0600 ~/.gem/credentials
 fi
 
-for source_version in $(./script/unpublished-suorce-versions)
+for source_version in $(./script/unpublished-source-versions)
 do
   if [ ! -f "tmp/vendor/cache/babel-source-$source_version.gem" ]; then
     ./script/test-gem "$version"
