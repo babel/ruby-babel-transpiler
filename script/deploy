@@ -18,10 +18,10 @@ EOF
   chmod 0600 ~/.gem/credentials
 fi
 
-for gem_version in $(./script/unpublished-gem-versions)
+for source_version in $(./script/unpublished-suorce-versions)
 do
-  if [ ! -f "tmp/vendor/cache/babel-source-$gem_version.gem" ]; then
+  if [ ! -f "tmp/vendor/cache/babel-source-$source_version.gem" ]; then
     ./script/test-gem "$version"
   fi
-  gem push "tmp/vendor/cache/babel-source-$gem_version.gem"
+  gem push "tmp/vendor/cache/babel-source-$source_version.gem"
 done
