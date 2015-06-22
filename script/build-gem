@@ -26,7 +26,7 @@ popd
 
 dir="tmp/babel-source-$VERSION"
 mkdir -p "$dir/lib/babel"
-cp "tmp/babel/dist/babel.js" "$dir/lib/babel.js"
+cp "tmp/babel/dist/browser.js" "$dir/lib/babel.js"
 cp "tmp/babel/dist/external-helpers.js" "$dir/lib/babel/external-helpers.js"
 cp "tmp/babel/dist/polyfill.js" "$dir/lib/babel/polyfill.js"
 
