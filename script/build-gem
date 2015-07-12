@@ -17,7 +17,7 @@ pushd babel/
 git fetch origin
 
 git checkout --quiet "v$VERSION"
-make bootstrap build
+make bootstrap build-dist
 
 DATE=$(git show --format=%at | head -n1)
 
