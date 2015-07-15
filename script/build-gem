@@ -17,7 +17,7 @@ pushd babel/
 git fetch origin
 
 git checkout --quiet "v$VERSION"
-make bootstrap build
+make bootstrap build-dist
 
 DATE=$(git show --format=%at | head -n1)
 
@@ -26,9 +26,9 @@ popd
 
 dir="tmp/babel-source-$VERSION"
 mkdir -p "$dir/lib/babel"
-cp "tmp/babel/dist/browser.js" "$dir/lib/babel.js"
-cp "tmp/babel/dist/external-helpers.js" "$dir/lib/babel/external-helpers.js"
-cp "tmp/babel/dist/polyfill.js" "$dir/lib/babel/polyfill.js"
+cp "tmp/babel/packages/babel/dist/browser.js" "$dir/lib/babel.js"
+cp "tmp/babel/packages/babel/dist/external-helpers.js" "$dir/lib/babel/external-helpers.js"
+cp "tmp/babel/packages/babel/dist/polyfill.js" "$dir/lib/babel/polyfill.js"
 
 cp "tmp/babel/LICENSE" "$dir/LICENSE"
 ./script/eval-erb-template "babel-source.gemspec.erb" "$GEM_VERSION" "$DATE" > "$dir/babel-source.gemspec"
