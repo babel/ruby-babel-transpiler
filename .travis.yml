@@ -25,6 +25,7 @@ env:
     - SOURCE_VERSION="~>5.3.0"
     - SOURCE_VERSION="~>5.4.0"
     - SOURCE_VERSION="~>5.6.0"
+    - SOURCE_VERSION="~>5.8.0"
 
 matrix:
   include:
