@@ -35,5 +35,7 @@ matrix:
       env:
     - rvm: 2.2
       env:
+    - rvm: 2.3.0
+      env:
   allow_failures:
     - env: VALIDATE_TRAVIS=1
