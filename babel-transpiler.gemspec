@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
     'LICENSE'
   ]
 
-  s.add_dependency 'babel-source', '>= 4.0', '< 6'
+  s.add_dependency 'babel-source', '>= 4.0', '< 7'
   s.add_dependency 'execjs', '~> 2.0'
   s.add_development_dependency 'minitest', '~> 5.5'
 

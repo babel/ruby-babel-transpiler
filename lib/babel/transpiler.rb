@@ -25,7 +25,7 @@ module Babel
     end
 
     def self.transform(code, options = {})
-      context.call('babel.transform', code, options.merge('ast' => false))
+      context.call('Babel.transform', code, options.merge('ast' => false))
     end
   end
 end
