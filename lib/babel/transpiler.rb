@@ -21,7 +21,7 @@ module Babel
     end
 
     def self.context
-      @context ||= ExecJS.compile("var self = this; " + File.read(script_path))
+      @context ||= ExecJS.compile("var self = this; " + File.read(script_path, encoding: 'utf-8'))
     end
 
     def self.transform(code, options = {})
