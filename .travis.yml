@@ -11,31 +11,21 @@ env:
   matrix:
     - BUILD_SOURCE_GEM=1
     - VALIDATE_TRAVIS=1
-    - SOURCE_VERSION="~>4.0.0"
-    - SOURCE_VERSION="~>4.1.0"
-    - SOURCE_VERSION="~>4.2.0"
-    - SOURCE_VERSION="~>4.3.0"
-    - SOURCE_VERSION="~>4.4.0"
-    - SOURCE_VERSION="~>4.5.0"
-    - SOURCE_VERSION="~>4.6.0"
-    - SOURCE_VERSION="~>4.7.0"
-    - SOURCE_VERSION="~>5.0.0"
-    - SOURCE_VERSION="~>5.1.0"
-    - SOURCE_VERSION="~>5.2.0"
-    - SOURCE_VERSION="~>5.3.0"
-    - SOURCE_VERSION="~>5.4.0"
     - SOURCE_VERSION="~>5.6.0"
     - SOURCE_VERSION="~>5.8.0"
+    - SOURCE_VERSION="~>6.26.3"
+    - SOURCE_VERSION="~>7.0.1"
+    - SOURCE_VERSION="~>7.1.5"
 
 matrix:
   include:
-    - rvm: 2.0.0
-      env:
-    - rvm: 2.1
-      env:
     - rvm: 2.2
       env:
-    - rvm: 2.3.0
+    - rvm: 2.3.8
+      env:
+    - rvm: 2.4.5
+      env:
+    - rvm: 2.5.3
       env:
   allow_failures:
     - env: VALIDATE_TRAVIS=1
